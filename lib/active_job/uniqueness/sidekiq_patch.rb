@@ -5,10 +5,13 @@ require 'sidekiq/api'
 
 module ActiveJob
   module Uniqueness
+    SIDEKIQ_JOB_WRAPPERS = %w[
+      ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper
+      Sidekiq::ActiveJob::Wrapper
+    ].freeze
+
     def self.unlock_sidekiq_job!(job_data)
-      unless %w[ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper Sidekiq::ActiveJob::Wrapper].include?(job_data['class'])
-        return
-      end
+      return unless SIDEKIQ_JOB_WRAPPERS.include?(job_data['class'])
 
       job = ActiveJob::Base.deserialize(job_data.fetch('args').first)
 

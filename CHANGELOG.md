@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased](https://github.com/veeqo/activejob-uniqueness/compare/v0.4.0...HEAD)
 
+Overskill fork (`overskill` branch). Upstream has not merged a pull request since
+December 2024; these are cherry-picked from open upstream pull requests, authors kept.
+
+### Added
+- Rails / ActiveJob 8.1 support: the activejob cap is now `< 9` (veeqo/activejob-uniqueness#97)
+- Sidekiq 8 support: locks are released for jobs wrapped in `Sidekiq::ActiveJob::Wrapper` (veeqo/activejob-uniqueness#92)
+
+### Changed
+- `Configuration` uses plain accessors instead of `ActiveSupport::Configurable`, which Rails 8.2 removes (veeqo/activejob-uniqueness#97)
+
 
 ## [0.4.0](https://github.com/veeqo/activejob-uniqueness/compare/v0.3.2...v0.4.0) - 2024-12-07
 
